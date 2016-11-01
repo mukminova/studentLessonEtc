@@ -1,0 +1,32 @@
+CREATE TABLE students
+(
+    id INTEGER PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    lname TEXT,
+    sex TEXT,
+    birthday TIMESTAMP,
+    CONSTRAINT students_pkey PRIMARY KEY ("id")
+);
+
+CREATE TABLE lessons (
+  "id"        SERIAL NOT NULL,
+  topic       TEXT   NOT NULL,
+  description TEXT,
+  duration    INTEGER,
+  "date"      DATE   NOT NULL,
+  CONSTRAINT lessons_pkey PRIMARY KEY ("id")
+);
+
+CREATE TABLE students_lesson (
+  "id"      SERIAL NOT NULL,
+  student_id   INTEGER,
+  lesson_id INTEGER,
+  CONSTRAINT students_lesson_pkey PRIMARY KEY ("id"),
+  CONSTRAINT students_lesson_student_id_fkey FOREIGN KEY (student_id)
+  REFERENCES students ("id") MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT students_lesson_lesson_id_fkey FOREIGN KEY (lesson_id)
+  REFERENCES lessons ("id") MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
