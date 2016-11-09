@@ -1,6 +1,6 @@
-package ru.innopolis.server.dao;
+package ru.innopolis.server.hibernateDao;
 
-import ru.innopolis.server.model.Students;
+import ru.innopolis.server.entity.StudentsEntity;
 
 import java.util.List;
 import java.util.Map;
@@ -13,32 +13,30 @@ public interface StudentsDao {
      * получить список студентов
      *
      * @return
-     * @throws ClassNotFoundException
      */
-    List<Students> getAllStudents() throws ClassNotFoundException;
+    List<StudentsEntity> getAllStudents();
 
     /**
      * добавить студента
      *
      * @param student
      */
-    void addStudent(Students student);
+    void addStudent(StudentsEntity student);
 
     /**
      * найти студента по ид
      *
      * @param studentId
      * @return
-     * @throws ClassNotFoundException
      */
-    Students getStudentById(Integer studentId) throws ClassNotFoundException;
+    StudentsEntity getStudentById(Integer studentId);
 
     /**
      * обновить данные студента
      *
      * @param student
      */
-    void updateStudent(Students student);
+    void updateStudent(StudentsEntity student);
 
     /**
      * удалить студента по ид
@@ -53,7 +51,7 @@ public interface StudentsDao {
      * @param student
      * @return
      */
-    List<Students> filterStudent(Students student);
+    List<StudentsEntity> filterStudent(StudentsEntity student);
 
     /**
      * сортировка студентов по заданному параметру
@@ -61,7 +59,7 @@ public interface StudentsDao {
      * @param sortField
      * @return
      */
-    List<Students> sortStudentsByField(String sortField);
+    List<StudentsEntity> sortStudentsByField(String sortField);
 
     /**
      * получить количество посещаемых занятий

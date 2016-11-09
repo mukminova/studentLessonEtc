@@ -1,7 +1,7 @@
-package ru.innopolis.server.dao;
+package ru.innopolis.server.hibernateDao;
 
 import org.springframework.stereotype.Component;
-import ru.innopolis.server.model.Lessons;
+import ru.innopolis.server.entity.LessonsEntity;
 
 import java.util.List;
 
@@ -12,7 +12,8 @@ public interface LessonDao {
      * получить список занятий
      *
      * @return
-     * @throws ClassNotFoundException
      */
-    List<Lessons> getLessonList() throws ClassNotFoundException;
+    List<LessonsEntity> getLessonList();
+
+    LessonsEntity getLessonById(int lessonId);
 }

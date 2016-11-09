@@ -1,19 +1,21 @@
 package ru.innopolis.common.service;
 
-import org.springframework.stereotype.Component;
-import ru.innopolis.server.model.Lessons;
+import org.springframework.stereotype.Service;
+import ru.innopolis.server.entity.LessonsEntity;
+import ru.innopolis.server.entity.StudentsEntity;
 
 import java.util.List;
 
 /**
  * интерфейс сервиса занятий
  */
-@Component
+@Service
 public interface LessonService {
     /**
      * получить список занятий
      * @return
-     * @throws ClassNotFoundException
      */
-    List<Lessons> getLessonList() throws ClassNotFoundException;
+    List<LessonsEntity> getLessonList();
+
+    LessonsEntity getLessonById(int lessonId);
 }

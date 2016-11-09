@@ -3,36 +3,33 @@ package ru.innopolis.server.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.innopolis.common.service.StudentService;
-import ru.innopolis.server.dao.StudentsDao;
-import ru.innopolis.server.model.Students;
+import ru.innopolis.server.entity.StudentsEntity;
+import ru.innopolis.server.hibernateDao.StudentsDao;
 
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Li on 31.10.16.
- */
 @Component
 public class StudentServiceImpl implements StudentService {
     @Autowired
     StudentsDao studentsDao;
 
-    public List<Students> getList() throws ClassNotFoundException {
+    public List<StudentsEntity> getList() {
         return studentsDao.getAllStudents();
     }
 
     @Override
-    public void addStudent(Students student) {
+    public void addStudent(StudentsEntity student) {
         studentsDao.addStudent(student);
     }
 
     @Override
-    public Students getStudentById(Integer studentId) throws ClassNotFoundException {
+    public StudentsEntity getStudentById(Integer studentId) {
         return studentsDao.getStudentById(studentId);
     }
 
     @Override
-    public void updateStudent(Students student) {
+    public void updateStudent(StudentsEntity student) {
         studentsDao.updateStudent(student);
     }
 
@@ -42,12 +39,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Students> filterStudent(Students student) {
+    public List<StudentsEntity> filterStudent(StudentsEntity student) {
         return studentsDao.filterStudent(student);
     }
 
     @Override
-    public List<Students> sortStudentsByField(String sortField) {
+    public List<StudentsEntity> sortStudentsByField(String sortField) {
         return studentsDao.sortStudentsByField(sortField);
     }
 

@@ -1,18 +1,17 @@
 package ru.innopolis.common.service;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import ru.innopolis.server.entity.StudentsLessonEntity;
 
 /**
  * интерфейс сервиса посещений студентов занятий
  */
-@Component
+@Service
 public interface StudentLessonService {
     /**
      * добавить посещение студента на занятие
      *
-     * @param studentId
-     * @param lessonId
-     * @throws ClassNotFoundException
+     * @param studentsLessonEntity
      */
-    void addStudentLesson(Integer studentId, Integer lessonId) throws ClassNotFoundException;
+    void addStudentLesson(StudentsLessonEntity studentsLessonEntity);
 }

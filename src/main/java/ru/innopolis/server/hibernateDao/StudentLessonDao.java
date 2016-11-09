@@ -1,6 +1,7 @@
-package ru.innopolis.server.dao;
+package ru.innopolis.server.hibernateDao;
 
 import org.springframework.stereotype.Component;
+import ru.innopolis.server.entity.StudentsLessonEntity;
 
 /**
  * Created by Li on 01.11.16.
@@ -10,9 +11,7 @@ public interface StudentLessonDao {
     /**
      * добавить посещение студента на занятие
      *
-     * @param studentId
-     * @param lessonId
-     * @throws ClassNotFoundException
+     * @param studentsLessonEntity
      */
-    void addStudentLesson(Integer studentId, Integer lessonId) throws ClassNotFoundException;
+    void addStudentLesson(StudentsLessonEntity studentsLessonEntity);
 }

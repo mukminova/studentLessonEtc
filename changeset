@@ -1,32 +1,55 @@
 CREATE TABLE students
 (
-    id INTEGER PRIMARY KEY NOT NULL,
-    name TEXT NOT NULL,
-    lname TEXT,
-    sex TEXT,
-    birthday TIMESTAMP,
-    CONSTRAINT students_pkey PRIMARY KEY ("id")
+  student_id SERIAL NOT NULL,
+  name       TEXT   NOT NULL,
+  lname      TEXT,
+  sex        TEXT,
+  birthday   TIMESTAMP,
+  CONSTRAINT students_pkey PRIMARY KEY ("student_id")
 );
 
 CREATE TABLE lessons (
-  "id"        SERIAL NOT NULL,
+  lesson_id   SERIAL NOT NULL,
   topic       TEXT   NOT NULL,
   description TEXT,
   duration    INTEGER,
   "date"      DATE   NOT NULL,
-  CONSTRAINT lessons_pkey PRIMARY KEY ("id")
+  CONSTRAINT lessons_pkey PRIMARY KEY ("lesson_id")
 );
 
 CREATE TABLE students_lesson (
-  "id"      SERIAL NOT NULL,
-  student_id   INTEGER,
-  lesson_id INTEGER,
-  CONSTRAINT students_lesson_pkey PRIMARY KEY ("id"),
+  students_lesson_id SERIAL NOT NULL,
+  student_id         INTEGER,
+  lesson_id          INTEGER,
+  CONSTRAINT students_lesson_pkey PRIMARY KEY ("students_lesson_id"),
   CONSTRAINT students_lesson_student_id_fkey FOREIGN KEY (student_id)
-  REFERENCES students ("id") MATCH SIMPLE
+  REFERENCES students ("student_id") MATCH SIMPLE
   ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT students_lesson_lesson_id_fkey FOREIGN KEY (lesson_id)
-  REFERENCES lessons ("id") MATCH SIMPLE
+  REFERENCES lessons ("lesson_id") MATCH SIMPLE
   ON UPDATE NO ACTION ON DELETE NO ACTION
 );
+
+CREATE TABLE users (
+  username VARCHAR(45) NOT NULL,
+  password VARCHAR(45) NOT NULL,
+  enabled  BOOLEAN     NOT NULL DEFAULT true,
+  CONSTRAINT username_pkey PRIMARY KEY ("username")
+);
+
+CREATE TABLE user_roles (
+  user_role_id SERIAL      NOT NULL,
+  username     VARCHAR(45) NOT NULL,
+  role         VARCHAR(45) NOT NULL,
+  CONSTRAINT user_role_id_pkey PRIMARY KEY ("user_role_id"),
+  CONSTRAINT uni_username_role UNIQUE (role, username),
+  CONSTRAINT username_fkey FOREIGN KEY (username) REFERENCES users (username) MATCH SIMPLE
+);
+
+INSERT INTO users (username, password, enabled) VALUES ('user', 'user', TRUE);
+INSERT INTO users (username, password, enabled) VALUES ('admin', 'admin', TRUE);
+
+INSERT INTO user_roles (username, role) VALUES ('admin', 'ROLE_USER');
+INSERT INTO user_roles (username, role) VALUES ('admin', 'ROLE_ADMIN');
+INSERT INTO user_roles (username, role) VALUES ('user', 'ROLE_USER');
 
