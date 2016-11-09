@@ -48,7 +48,7 @@ public class StudentLessonController {
     public String studentPostList(HttpServletRequest request) {
         StudentsLessonEntity studentsLessonEntity = new StudentsLessonEntity();
         studentsLessonEntity.setStudentsByStudentId(studentService.getStudentById(Integer.parseInt(request.getParameter("studentId"))));
-        studentsLessonEntity.setLessonsByLessonId(lessonService.getLessonById(Integer.parseInt(request.getParameter("lessonId"))));
+        studentsLessonEntity.setLessonsByLessonId(lessonService.getLessonByLessonId(Integer.parseInt(request.getParameter("lessonId"))));
         studentLessonService.addStudentLesson(studentsLessonEntity);
         return "index";
     }

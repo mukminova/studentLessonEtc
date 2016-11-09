@@ -149,10 +149,8 @@ public class StudentController {
     @RequestMapping(value = "/filter", method = RequestMethod.POST)
     public ModelAndView filterStudentList(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
-        StudentsEntity student = new StudentsEntity();
-        student.setName(request.getParameter("filterByName"));
         mv.setViewName("studentList");
-        mv.addObject("list", studentService.filterStudent(student));
+        mv.addObject("list", studentService.filterStudent(request.getParameter("filterByName")));
         return mv;
     }
 
@@ -168,7 +166,7 @@ public class StudentController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("studentList");
         mv.addObject("mapWithCounts", studentService.getMapWithCounts());
-        mv.addObject("list", studentService.sortStudentsByField(sortField));
+//        mv.addObject("list", studentService.sortStudentsByField(sortField));
         return mv;
     }
 }

@@ -1,5 +1,6 @@
 package ru.innopolis.common.service;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.innopolis.server.entity.StudentsEntity;
 
@@ -18,7 +19,7 @@ public interface StudentService {
      *
      * @return
      */
-    List<StudentsEntity> getList();
+    Iterable<StudentsEntity> getList();
 
     /**
      * добавить студента
@@ -52,10 +53,10 @@ public interface StudentService {
     /**
      * фильтр студентов по имени
      *
-     * @param student
+     * @param name
      * @return
      */
-    List<StudentsEntity> filterStudent(StudentsEntity student);
+    List<StudentsEntity> filterStudent(String name);
 
     /**
      * сортировка студентов по заданному параметру

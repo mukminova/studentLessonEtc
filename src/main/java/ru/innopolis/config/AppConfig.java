@@ -1,4 +1,4 @@
-package ru.innopolis.server;
+package ru.innopolis.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,11 +9,26 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-@EnableWebMvc
 @Configuration
-@ComponentScan({"ru.innopolis.*"})
-@Import({SecurityConfig.class})
+@EnableWebMvc
+@ComponentScan("ru.innopolis")
+@Import({SecurityContext.class, PersistenceContext.class})
 public class AppConfig {
+
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/WEB-INF/views/**").addResourceLocations("/views/");
+//    }
+
+    @Bean
+    public InternalResourceViewResolver setupViewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setSuffix(".jsp");
+        resolver.setViewClass(JstlView.class);
+
+        return resolver;
+    }
 
     @Bean(name = "dataSource")
     public DriverManagerDataSource dataSource() {
@@ -23,14 +38,5 @@ public class AppConfig {
         driverManagerDataSource.setUsername("postgres");
         driverManagerDataSource.setPassword("");
         return driverManagerDataSource;
-    }
-
-    @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/views/");
-        viewResolver.setSuffix(".jsp");
-        return viewResolver;
     }
 }

@@ -1,55 +1,58 @@
 package ru.innopolis.server.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import ru.innopolis.common.service.StudentService;
 import ru.innopolis.server.entity.StudentsEntity;
-import ru.innopolis.server.hibernateDao.StudentsDao;
+import ru.innopolis.server.repository.StudentsRepository;
 
 import java.util.List;
 import java.util.Map;
 
 @Component
 public class StudentServiceImpl implements StudentService {
+    //    @Autowired
+//    StudentsDao studentsDao;
     @Autowired
-    StudentsDao studentsDao;
+    StudentsRepository studentsRepository;
 
-    public List<StudentsEntity> getList() {
-        return studentsDao.getAllStudents();
+    public Iterable<StudentsEntity> getList() {
+        return studentsRepository.findAll();
     }
 
     @Override
     public void addStudent(StudentsEntity student) {
-        studentsDao.addStudent(student);
+        studentsRepository.save(student);
     }
 
     @Override
     public StudentsEntity getStudentById(Integer studentId) {
-        return studentsDao.getStudentById(studentId);
+        return studentsRepository.findOne(studentId);
     }
 
     @Override
     public void updateStudent(StudentsEntity student) {
-        studentsDao.updateStudent(student);
+        studentsRepository.save(student);
     }
 
     @Override
     public void deleteStudentById(Integer studentId) {
-        studentsDao.deleteStudentById(studentId);
+        studentsRepository.delete(studentId);
     }
 
     @Override
-    public List<StudentsEntity> filterStudent(StudentsEntity student) {
-        return studentsDao.filterStudent(student);
+    public List<StudentsEntity> filterStudent(String name) {
+        return studentsRepository.findByAndSort(name);
     }
 
     @Override
     public List<StudentsEntity> sortStudentsByField(String sortField) {
-        return studentsDao.sortStudentsByField(sortField);
+        return studentsRepository.findByAndSort(sortField);
     }
 
     @Override
     public Map<Integer, Integer> getMapWithCounts() {
-        return studentsDao.countVisitsWithStudentId();
+        return null;
     }
 }

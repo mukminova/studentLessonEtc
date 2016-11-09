@@ -2,7 +2,6 @@ package ru.innopolis.common.service;
 
 import org.springframework.stereotype.Service;
 import ru.innopolis.server.entity.LessonsEntity;
-import ru.innopolis.server.entity.StudentsEntity;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ public interface LessonService {
      * получить список занятий
      * @return
      */
-    List<LessonsEntity> getLessonList();
+    Iterable<LessonsEntity> getLessonList();
 
-    LessonsEntity getLessonById(int lessonId);
+    LessonsEntity getLessonByLessonId(int lessonId);
 }
