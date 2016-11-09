@@ -43,6 +43,10 @@ public class SecurityContext extends WebSecurityConfigurerAdapter {
                 .and().formLogin().loginPage("/login")
                 .loginProcessingUrl("/j_spring_security_check")
                 .failureUrl("/login?error")
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll()
                 .and()
                 .csrf();
     }
