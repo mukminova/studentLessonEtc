@@ -1,0 +1,4 @@
+rootProject.name = 'testSpringMVCProject'
+include ':common:war'
+include ':server:war'
+include ':web:war'

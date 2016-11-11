@@ -1,0 +1,12 @@
+group 'common'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'jetty'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
