@@ -1,20 +1,23 @@
 package ru.innopolis.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  * Created by Li on 07.11.16.
  */
 @Entity
-@Table(name = "students", schema = "public", catalog = "test_database")
-//@NamedQuery(name = "StudentsEntity.getAll", query = "SELECT s from StudentsEntity s")
-public class StudentsEntity {
+@Table(name = "students")
+public class StudentsEntity implements Serializable {
+    private static final long serialVersionUID = 5050537099986205482L;
+
     private Integer studentId;
     private String name;
     private String lname;
     private String sex;
     private Timestamp birthday;
+    private Integer version;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +30,6 @@ public class StudentsEntity {
         this.studentId = studentId;
     }
 
-    @Basic
     @Column(name = "name", nullable = false, length = -1)
     public String getName() {
         return name;
@@ -37,7 +39,6 @@ public class StudentsEntity {
         this.name = name;
     }
 
-    @Basic
     @Column(name = "lname", nullable = true, length = -1)
     public String getLname() {
         return lname;
@@ -47,7 +48,6 @@ public class StudentsEntity {
         this.lname = lname;
     }
 
-    @Basic
     @Column(name = "sex", nullable = true, length = -1)
     public String getSex() {
         return sex;
@@ -57,7 +57,6 @@ public class StudentsEntity {
         this.sex = sex;
     }
 
-    @Basic
     @Column(name = "birthday", nullable = true)
     public Timestamp getBirthday() {
         return birthday;
@@ -65,6 +64,16 @@ public class StudentsEntity {
 
     public void setBirthday(Timestamp birthday) {
         this.birthday = birthday;
+    }
+
+    @Version
+    @Column(name="version")
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     @Override

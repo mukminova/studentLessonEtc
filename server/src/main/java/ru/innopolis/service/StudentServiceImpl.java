@@ -4,7 +4,6 @@ import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.innopolis.entity.StudentsEntity;
 import ru.innopolis.repository.StudentsRepository;
@@ -12,7 +11,6 @@ import ru.innopolis.model.Students;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service("studentService")
 public class StudentServiceImpl implements StudentService {

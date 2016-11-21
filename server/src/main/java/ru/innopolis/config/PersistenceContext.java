@@ -25,7 +25,6 @@ public class PersistenceContext {
 
     private static final String PROP_HIBERNATE_DIALECT = "hibernate.dialect";
     private static final String PROP_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
-    private static final String PROP_ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
     private static final String PROP_HIBERNATE_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
 
     @Resource
@@ -39,7 +38,6 @@ public class PersistenceContext {
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistence.class);
         entityManagerFactoryBean.setPackagesToScan("ru.innopolis.*");
-
         entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
 
         return entityManagerFactoryBean;

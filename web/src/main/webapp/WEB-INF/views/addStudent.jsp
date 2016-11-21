@@ -5,15 +5,16 @@
 </head>
 <body>
 <a href="/">На главную</a>
-<form action="addStudent" method="post">
+<form action="addStudent" method="post" name="studentForm">
+    <input type="text" name="version" hidden>
     <table>
         <tr>
             <td><label>Name*:</label></td>
-            <td><input type="text" name="studentName"/></td>
+            <td><input type="text" name="name"/></td>
         </tr>
         <tr>
             <td><label>Last name:</label></td>
-            <td><input type="text" name="studentLastName"/></td>
+            <td><input type="text" name="lname"/></td>
         </tr>
 
         <tr>
@@ -21,14 +22,14 @@
                 <label>Sex:</label>
             </td>
             <td>
-                <select name="studentSex">
+                <select name="sex">
                     <option>G</option>
                     <option>M</option>
                 </select></td>
         </tr>
         <tr>
             <td><label>Birthday</label></td>
-            <td><input type="date" name="studentBirthday"/></td>
+            <td><input type="date" name="birthday"/></td>
         </tr>
     </table>
 

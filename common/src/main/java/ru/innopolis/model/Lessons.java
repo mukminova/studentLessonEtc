@@ -7,11 +7,13 @@ import java.sql.Date;
  * модель занятий
  */
 public class Lessons implements Serializable {
+    private static final long serialVersionUID = 3186176645607472877L;
     private Integer lessonId;
     private String topic;
     private String description;
     private Integer duration;
     private Date date;
+    private Integer version;
 
     public Integer getLessonId() {
         return lessonId;
@@ -51,5 +53,13 @@ public class Lessons implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

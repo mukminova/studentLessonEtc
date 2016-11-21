@@ -1,16 +1,20 @@
 package ru.innopolis.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Li on 07.11.16.
  */
 @Entity
 @Table(name = "students_lesson")
-public class StudentsLessonEntity {
+public class StudentsLessonEntity implements Serializable {
+    private static final long serialVersionUID = 5338064511732392146L;
+
     private Integer id;
     private StudentsEntity studentsByStudentId;
     private LessonsEntity lessonsByLessonId;
+    private Integer version;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +45,16 @@ public class StudentsLessonEntity {
 
     public void setLessonsByLessonId(LessonsEntity lessonsByLessonId) {
         this.lessonsByLessonId = lessonsByLessonId;
+    }
+
+    @Version
+    @Column(name="version")
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     @Override

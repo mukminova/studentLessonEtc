@@ -1,20 +1,23 @@
 package ru.innopolis.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
-
 @Entity
-@Table(name = "lessons", schema = "public", catalog = "test_database")
-//@NamedQuery(name = "LessonsEntity.getAll", query = "SELECT l from LessonsEntity l")
-public class LessonsEntity {
+@Table(name = "lessons")
+public class LessonsEntity implements Serializable {
+    private static final long serialVersionUID = 7259576196588663748L;
+
     private Integer lessonId;
     private String topic;
     private String description;
     private Integer duration;
     private Date date;
+    private Integer version;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lesson_id", nullable = false)
     public Integer getLessonId() {
         return lessonId;
@@ -24,7 +27,6 @@ public class LessonsEntity {
         this.lessonId = lessonId;
     }
 
-    @Basic
     @Column(name = "topic", nullable = false, length = -1)
     public String getTopic() {
         return topic;
@@ -34,8 +36,7 @@ public class LessonsEntity {
         this.topic = topic;
     }
 
-    @Basic
-    @Column(name = "description", nullable = true, length = -1)
+    @Column(name = "description", length = -1)
     public String getDescription() {
         return description;
     }
@@ -44,7 +45,6 @@ public class LessonsEntity {
         this.description = description;
     }
 
-    @Basic
     @Column(name = "duration", nullable = true)
     public Integer getDuration() {
         return duration;
@@ -54,7 +54,6 @@ public class LessonsEntity {
         this.duration = duration;
     }
 
-    @Basic
     @Column(name = "date", nullable = false)
     public Date getDate() {
         return date;
@@ -62,6 +61,16 @@ public class LessonsEntity {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Version
+    @Column(name="version")
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     @Override

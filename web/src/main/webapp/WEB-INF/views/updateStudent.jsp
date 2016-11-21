@@ -5,20 +5,21 @@
 </head>
 <body>
 <a href="/studentList">К списку студентов</a>
-<form action="${studentId}" method="post">
+<form action="${studentId}" method="post" name="studentForm">
+    <input type="text" name="version" value="${student.version}" hidden>
     <table>
         <tr>
             <td>Name:</td>
-            <td><input type="text" name="studentName" value="${studentName}"></td>
+            <td><input type="text" name="name" value="${student.name}"></td>
         </tr>
         <tr>
             <td>Last name:</td>
-            <td><input type="text" name="studentLastName" value="${studentLastName}"></td>
+            <td><input type="text" name="lname" value="${student.lname}"></td>
         </tr>
         <tr>
             <td>Sex:</td>
             <td>
-                <select name="studentSex">
+                <select name="sex">
                     <option selected="selected"></option>
                     <option>G</option>
                     <option>M</option>
@@ -27,7 +28,7 @@
         </tr>
         <tr>
             <td>Birthday</td>
-            <td><input type="date" name="studentBirthday" value="${studentBirthday}"></td>
+            <td><input type="date" name="birthday" value="${student.birthday}"></td>
         </tr>
     </table>
 
