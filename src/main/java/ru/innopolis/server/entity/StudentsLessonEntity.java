@@ -1,16 +1,26 @@
 package ru.innopolis.server.entity;
 
-import javax.persistence.*;
+import org.hibernate.annotations.*;
 
-/**
- * Created by Li on 07.11.16.
- */
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+
+import java.io.Serializable;
+
+
 @Entity
 @Table(name = "students_lesson")
-public class StudentsLessonEntity {
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+public class StudentsLessonEntity implements Serializable {
     private Integer id;
     private StudentsEntity studentsByStudentId;
     private LessonsEntity lessonsByLessonId;
+
+    public StudentsLessonEntity() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,7 +69,6 @@ public class StudentsLessonEntity {
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
-
 
 
 }

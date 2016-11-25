@@ -1,21 +1,26 @@
 package ru.innopolis.server.entity;
 
+import org.hibernate.annotations.*;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import org.hibernate.annotations.Cache;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-/**
- * Created by Li on 07.11.16.
- */
+
 @Entity
 @Table(name = "students", schema = "public", catalog = "test_database")
-@NamedQuery(name = "StudentsEntity.getAll", query = "SELECT s from StudentsEntity s")
-public class StudentsEntity {
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+public class StudentsEntity implements Serializable {
     private Integer studentId;
     private String name;
     private String lname;
     private String sex;
     private Timestamp birthday;
+
+    public StudentsEntity(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

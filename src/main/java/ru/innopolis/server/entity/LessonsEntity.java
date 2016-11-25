@@ -1,18 +1,29 @@
 package ru.innopolis.server.entity;
 
+import org.hibernate.annotations.*;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+
+import java.io.Serializable;
 import java.sql.Date;
 
 
 @Entity
 @Table(name = "lessons", schema = "public", catalog = "test_database")
-@NamedQuery(name = "LessonsEntity.getAll", query = "SELECT l from LessonsEntity l")
-public class LessonsEntity {
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+public class LessonsEntity implements Serializable {
     private Integer lessonId;
     private String topic;
     private String description;
     private Integer duration;
     private Date date;
+
+    public LessonsEntity() {
+    }
 
     @Id
     @Column(name = "lesson_id", nullable = false)

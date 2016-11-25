@@ -1,24 +1,34 @@
 package ru.innopolis.server;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 public class HibernateUtil {
-    private static final String PERSISTENT_UNIT_NAME = "item-manager-pu";
+    private static SessionFactory sessionFactory = buildSessionFactory();
 
-    private static final EntityManagerFactory emf;
-
-    static {
+    private static SessionFactory buildSessionFactory() {
         try {
-            emf = Persistence.createEntityManagerFactory(PERSISTENT_UNIT_NAME);
+            if (sessionFactory == null) {
+                Configuration configuration = new Configuration().configure(HibernateUtil.class.getResource("/hibernate.cfg.xml"));
+                StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder();
+                serviceRegistryBuilder.applySettings(configuration.getProperties());
+                ServiceRegistry serviceRegistry = serviceRegistryBuilder.build();
+                sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+            }
+            return sessionFactory;
         } catch (Throwable ex) {
+            System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
     }
 
-    public static EntityManager getEm() {
-        return emf.createEntityManager();
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public static void shutdown() {
+        getSessionFactory().close();
     }
 }

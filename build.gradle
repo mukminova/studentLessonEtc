@@ -7,8 +7,10 @@ apply plugin: 'jetty'
 sourceCompatibility = 1.8
 
 repositories {
-    mavenLocal()
     mavenCentral()
+    maven {
+        url "http://www.gridgainsystems.com/nexus/content/repositories/external/"
+    }
 }
 
 dependencies {
@@ -26,14 +28,21 @@ dependencies {
     compile "org.springframework.security:spring-security-core:3.2.5.RELEASE"
     compile "org.springframework.security:spring-security-web:3.2.5.RELEASE"
     compile "org.springframework.security:spring-security-taglibs:3.2.5.RELEASE"
-    compile "javax.persistence:persistence-api:1.0"
 
-    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.4.Final'
-    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.4.Final'
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.5.Final'
+//    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.4.Final'
+//    compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.11.Final'
+
 
     testCompile "junit:junit:4.11"
     testCompile "org.jmock:jmock-junit4:2.8.1"
     testCompile "org.mockito:mockito-all:1.8.4"
+
+    /*apache ignite */
+    compile "org.apache.ignite:ignite-core:1.7.0"
+    compile "org.apache.ignite:ignite-spring:1.7.0"
+    compile "org.apache.ignite:ignite-indexing:1.7.0"
+    compile group: 'org.apache.ignite', name: 'ignite-hibernate', version: '1.7.0'
 
 }
 
